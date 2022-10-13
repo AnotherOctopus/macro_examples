@@ -1,0 +1,13 @@
+[package]
+name = "declarative_macros"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "declarative_macros"
+path = "src/lib.rs"
+
+[dependencies]
+
+[dev-dependencies]
+rstest = { version = "0.15.0" }

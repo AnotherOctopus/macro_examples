@@ -1,0 +1,20 @@
+[package]
+name = "derive_macros"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "derive_macros"
+path = "src/lib.rs"
+proc-macro = true
+
+[dependencies]
+testing_logger = { version = "0.1.1" }
+log = { version = "0.4.17" }
+quote = { version = "1.0.20"}
+syn = { version = "1.0.98", features= ["full","extra-traits","derive"]}
+proc-macro-error = {version = "1.0.4"}
+proc-macro2 = {version = "1.0.43"}
+
+[dev-dependencies]
+rstest = { version = "0.15.0" }
