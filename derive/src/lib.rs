@@ -3,7 +3,7 @@
 extern crate proc_macro;
 use proc_macro::TokenStream;
 use quote::{quote, format_ident};
-use syn::{parse_macro_input, DeriveInput};
+use syn::{parse_macro_input, DeriveInput, spanned::Spanned};
 
 #[proc_macro_derive(Getters)]
 pub fn derive_answer_fn(item: TokenStream) -> TokenStream {
@@ -20,10 +20,10 @@ pub fn derive_answer_fn(item: TokenStream) -> TokenStream {
                         fieldnames.push(format_ident!("get_{}", fieldname));
                     }
                 },
-                _ => panic!("Only Handling Names fields")
+                _ => return syn::Error::new(data_struct.struct_token.span(), "Can Only Handle Named").to_compile_error().into()
             }
         },
-        _ => panic!("Only Handling Structs")
+        _ => return syn::Error::new(input.span(), "Can Only Handle Structs").to_compile_error().into()
 
     }
     let structname = input.ident;
@@ -36,6 +36,6 @@ pub fn derive_answer_fn(item: TokenStream) -> TokenStream {
             )*
         }
     ).into();
-    println!("{}", generated);
+    //println!("{}", generated);
     generated
 }

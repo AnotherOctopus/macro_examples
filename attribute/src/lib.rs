@@ -12,13 +12,15 @@ pub fn another_one(attr: proc_macro::TokenStream, items: proc_macro::TokenStream
     new_block.push(syn::parse_str("x = x + 1;").unwrap());
     new_block.append(&mut (*func.block).stmts.clone());
     func.block.stmts = new_block;
-    quote!{
+    let generated = quote!{
         #func
-    }.into()
+    }.into();
+    println!("another_one generation: {}", generated);
+    generated
 }
 
 #[proc_macro_attribute]
-pub fn do_n_times(attr: proc_macro::TokenStream, items: proc_macro::TokenStream) -> proc_macro::TokenStream {
+pub fn do_10_times(attr: proc_macro::TokenStream, items: proc_macro::TokenStream) -> proc_macro::TokenStream {
     let mut func = parse_macro_input!(items as ItemFn);
     let return_line = (*func.block).stmts.remove((*func.block).stmts.len() - 1);
     let new_loop = syn::ExprForLoop{
@@ -36,6 +38,6 @@ pub fn do_n_times(attr: proc_macro::TokenStream, items: proc_macro::TokenStream)
     let generated = quote!{
         #func
     }.into();
-    //println!("{}", generated);
+    //println!("do_10_tines generation: {}", generated);
     generated
 }

@@ -2,8 +2,14 @@
 #![allow(unused_variables)]
 use declarative_macros::{set_things, call_trait, create_fn, bit_more_complicated, print_vars};
 use function_like_macros::bf;
-use attribute_macros::{another_one, do_n_times};
+use attribute_macros::{another_one, do_10_times};
 use derive_macros::Getters;
+/*
+#[derive(Getters)]
+enum Thingy{
+
+}
+ */
 
 #[derive(Getters)]
 struct FooBar2{
@@ -67,7 +73,7 @@ fn demo_function_like(){
 }
 
 #[another_one]
-#[do_n_times]
+#[do_10_times]
 fn add_one(mut x: u8) -> u8{
     x = x + 1;
     x
